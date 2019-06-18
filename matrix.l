@@ -7,15 +7,15 @@
 %}
 %option noyywrap
 
-
 DIGITO [0-9]
 NUMERO {DIGITO}+
 IGNORA [" "|\t]
 
 %%   
 {NUMERO} {yylval.integer=atoi(yytext); return(NUMERO);}
-"m"  {return (MULT);}
-"s"  {return (SOMAR);}
+"*" {return (MULTIPLICACAO);}
+"+" {return (SOMA);}
+"-" {return (SUBTRACAO);}
 "t" {return (TRANSPOSTA);}
 "d" {return (DETERMINANTE);}
 "(" {return (PAA); }
@@ -23,14 +23,13 @@ IGNORA [" "|\t]
 "{" {return (CA); }
 "}" {return (CF); }
 "," {return (VIRG); }
-"*" {return (TMULT); }
-"+" {return (TSOMA); }
+";" {return (PONTVR); }
 "end" {return (FINAL);}
 "/n" 	{line++;}
 " "	{}
 [a-zA-Z]+ {return LETTER;}
 [\t\r\f\n] {}
 . {
-	printf("Error lexico in the line %d",line);
+	printf("Erro léxico na linha %d",line);
 }
 %%

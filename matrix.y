@@ -6,6 +6,7 @@
    void yyerror(char*msg);
    void multMatrix(int matriz1[3][3],int matriz2[3][3]);
    void somaMatrix(int matriz1[3][3],int matriz2[3][3]);
+   void subMatrix(int matriz1[3][3],int matriz2[3][3]);
    void transpostaMatrix(int matriz[3][3]);
    void determinanteMatrix(int matriz[3][3]);
    
@@ -24,18 +25,20 @@
 }
 %token <integer> NUMERO
 %token MULT 
-%token SOMAR
 %token PAA
 %token PAF 
 %token CA 
 %token CF 
 %token VIRG 
-%token TMULT
-%token TSOMA
 %token FINAL
 %token LETTER
 %token TRANSPOSTA
 %token DETERMINANTE
+%token MULTIPLICACAO
+%token SOMA
+%token SUBTRACAO
+%token PONTVR
+
 
 %type <integer> A
 %type <integer> B
@@ -51,22 +54,26 @@
 
 Statement: 
 | Statement EXPRESSION;
-EXPRESSION: MULT PAA MATRIX TMULT MATRIZ PAF FINALIZEMULT;
-EXPRESSION: SOMAR PAA MATRIX TSOMA MATRIZ PAF FINALIZESOMA;
+EXPRESSION: MULTIPLICACAO PAA MATRIX PONTVR MATRIZ PAF FINALIZEMULT;
+EXPRESSION: SOMA PAA MATRIX PONTVR MATRIZ PAF FINALIZESOMA;
+EXPRESSION: SUBTRACAO PAA MATRIX PONTVR MATRIZ PAF FINALIZESUB;
 EXPRESSION: TRANSPOSTA PAA MATRIX PAF FINALIZETRANSPOSTA;
 EXPRESSION: DETERMINANTE PAA MATRIX PAF FINALIZEDETERMINANTE;
 
 FINALIZEMULT : FINAL{multMatrix(matriz1, matriz2);} 
-| LETTER {printf("\nInvalid Sentence ");}
+| LETTER {printf("\nSentença inválida ");}
 
 FINALIZESOMA : FINAL{somaMatrix(matriz1, matriz2);} 
-| LETTER {printf("\nInvalid Sentence ");}
+| LETTER {printf("\nSentença inválida ");}
+
+FINALIZESUB : FINAL{subMatrix(matriz1, matriz2);} 
+| LETTER {printf("\nSentença inválida ");}
 
 FINALIZETRANSPOSTA : FINAL{transpostaMatrix(matriz1);} 
-| LETTER {printf("\nInvalid Sentence ");}
+| LETTER {printf("\nSentença inválida ");}
 
 FINALIZEDETERMINANTE: FINAL{determinanteMatrix(matriz1);} 
-| LETTER {printf("\nInvalid Sentence ");}
+| LETTER {printf("\nSentença inválida ");}
 
 MATRIX: VET1  VET2 VET3;
 VET1 : CA A VIRG B VIRG C CF;
@@ -98,17 +105,18 @@ R:NUMERO{ matriz2[2][2]= $1;};
 
 %%
 void yyerror(char *s){
-  printf("\nThat sentense is invalid: %s",s);
+  printf("\nA sentença é inválida: %s",s);
   
 }
 int main(int argc,char **argv){
 
   printf("\n--------------Operações com matrizes 3x3--------------\n\n");
   
-  printf("\n Multiplicação: m({x,x,x}{x,x,x}{x,x,x}:{x,x,x}{x,x,x}{x,x,x})end\n");
-  printf("\n Soma: s({x,x,x}{x,x,x}:{x,x,x}{x,x,x})end\n");
-  printf("\n Transposta: t({x,x,x}{x,x,x})end\n");
-  printf("\n Determinante: d({x,x,x}{x,x,x})end\n");
+  printf("\n Multiplicação: *({x,x,x}{x,x,x}{x,x,x};{x,x,x}{x,x,x}{x,x,x})end\n");
+  printf("\n Soma: +({x,x,x}{x,x,x};{x,x,x}{x,x,x})end\n");
+  printf("\n Subtração: -({x,x,x}{x,x,x};{x,x,x}{x,x,x})end\n");
+  printf("\n Transposta: transp({x,x,x}{x,x,x})end\n");
+  printf("\n Determinante: det({x,x,x}{x,x,x})end\n");
 
   printf("\n-------------------------------------------------------\n\n");
 
@@ -125,13 +133,16 @@ int main(int argc,char **argv){
 }
 
 void determinanteMatrix(int matriz[3][3]){
+	printf("\n\n\t:: Determinante da matriz ::\n\n");
 	float det = 0;
-	det=((matriz[0][0]*matriz[1][1]*matriz[2][2])+(matriz[0][1]*matriz[1][2]*matriz[2][0])+(matriz[0][2]*matriz[1][0]*matriz[2][2]))-((matriz[2][0]*matriz[1][1]*matriz[0][2])+(matriz[2][1]*matriz[1][2]*matriz[0][0])+(matriz[2][2]*matriz[1][0]*matriz[0][1])); /*formula para calcular a determinante */
+	det=((matriz[0][0]*matriz[1][1]*matriz[2][2])+(matriz[0][1]*matriz[1][2]*matriz[2][0])+(matriz[0][2]*matriz[1][0]*matriz[2][2]))-((matriz[2][0]*matriz[1][1]*matriz[0][2])+(matriz[2][1]*matriz[1][2]*matriz[0][0])+(matriz[2][2]*matriz[1][0]*matriz[0][1]));
 	printf("Determinante da matriz = %0.2f\n",det);
+	printf("\n");
 }
+
 void transpostaMatrix(int matriz[3][3]){
+	printf("\n\n\t:: Transposta da matriz ::\n\n");
 	int f=0, g=0;
-	printf("\n\n\t:: Transposta ::\n\n");
 	while(f<3){
 		g=0;
 		while(g<3){
@@ -160,10 +171,11 @@ void transpostaMatrix(int matriz[3][3]){
 
 
 }
+
 void somaMatrix(int matriz1[3][3],int matriz2[3][3]){
 
+	printf("\n\n\t:: Soma das matrizes ::\n\n");
 	int f=0, g=0;
-	printf("\n\n\t:: Sum ::\n\n");
 	while(f<3){
 		g=0;
 		while(g<3){
@@ -197,16 +209,14 @@ void somaMatrix(int matriz1[3][3],int matriz2[3][3]){
 		}
 		printf("\n");
 		f++;
-     }
-
-         
+     }     
          
 }
 
-void multMatrix(int matriz1[3][3],int matriz2[3][3]){
+void subMatrix(int matriz1[3][3],int matriz2[3][3]){
 
+	printf("\n\n\t:: Subtração das matrizes ::\n\n");
 	int f=0, g=0;
-	printf("\n\n\t:: Product ::\n\n");
 	while(f<3){
 		g=0;
 		while(g<3){
@@ -235,12 +245,62 @@ void multMatrix(int matriz1[3][3],int matriz2[3][3]){
 	while(f<3){
 		g=0;
 		while(g<3){
-			printf("\t  %d",matriz1[f][g]*matriz2[f][g]);
+			printf("\t  %d",matriz1[f][g]-matriz2[f][g]);
 			g++;
 		}
 		printf("\n");
 		f++;
-     }      
-         
+     }         
 }
 
+void multMatrix(int matriz1[3][3],int matriz2[3][3]){
+	
+	printf("\n\n\t:: Produto das matrizes ::\n\n");
+	int result[3][3]={{0,0,0},{0,0,0},{0,0,0}};
+	int f=0, g=0;
+	while(f<3){
+		g=0;
+		while(g<3){
+			printf("\t  %d",matriz1[f][g]);
+			g++;
+		}
+		f++;
+		printf("\n");
+	}
+	printf("\t  ----------\n");
+	f=0; g=0;
+	
+	
+	while(f<3){
+		g=0;
+		while(g<3){
+			printf("\t  %d",matriz2[f][g]);
+			g++;
+		}
+		f++;
+		printf("\n");
+	}
+	printf("\t  ----------\n\n\n");
+
+	int i, j, k;
+    for(i = 0; i < 3; i++)
+    {
+            for(j = 0; j < 3; j++)
+            {
+                    for(k = 0; k < 3; k++)
+                    {
+                            result[i][j] +=  matriz1[i][k] *  matriz2[k][j];
+                    }
+            }
+    }
+
+	f=0;g=0;
+    for (f = 0; f < 3; f++)
+    {
+        for(g = 0; g < 3; g++){
+			printf("\t  %d",result[f][g]);
+        }
+        printf("\n");
+    }   
+         
+}
