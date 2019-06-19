@@ -115,8 +115,8 @@ int main(int argc,char **argv){
   printf("\n Multiplicação: *({x,x,x}{x,x,x}{x,x,x};{x,x,x}{x,x,x}{x,x,x})end\n");
   printf("\n Soma: +({x,x,x}{x,x,x};{x,x,x}{x,x,x})end\n");
   printf("\n Subtração: -({x,x,x}{x,x,x};{x,x,x}{x,x,x})end\n");
-  printf("\n Transposta: transp({x,x,x}{x,x,x})end\n");
-  printf("\n Determinante: det({x,x,x}{x,x,x})end\n");
+  printf("\n Transposta: t({x,x,x}{x,x,x}{x,x,x})end\n");
+  printf("\n Determinante: d({x,x,x}{x,x,x}{x,x,x})end\n");
 
   printf("\n-------------------------------------------------------\n\n");
 
