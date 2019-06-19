@@ -115,8 +115,8 @@ int main(int argc,char **argv){
   printf("\n Multiplicação: *({x,x,x}{x,x,x}{x,x,x};{x,x,x}{x,x,x}{x,x,x})end\n");
   printf("\n Soma: +({x,x,x}{x,x,x};{x,x,x}{x,x,x})end\n");
   printf("\n Subtração: -({x,x,x}{x,x,x};{x,x,x}{x,x,x})end\n");
-  printf("\n Transposta: t({x,x,x}{x,x,x}{x,x,x})end\n");
-  printf("\n Determinante: d({x,x,x}{x,x,x}{x,x,x})end\n");
+  printf("\n Transposta: transp({x,x,x}{x,x,x}{x,x,x})end\n");
+  printf("\n Determinante: det({x,x,x}{x,x,x}{x,x,x})end\n");
 
   printf("\n-------------------------------------------------------\n\n");
 
@@ -152,7 +152,7 @@ void transpostaMatrix(int matriz[3][3]){
 		f++;
 		printf("\n");
 	}
-	printf("\t  ----------\n");
+	printf("\t  -------------------\n");
 
 	f=0; g=0;
 	while(f<3){
@@ -185,7 +185,7 @@ void somaMatrix(int matriz1[3][3],int matriz2[3][3]){
 		f++;
 		printf("\n");
 	}
-	printf("\t  ----------\n");
+	printf("\t  -------------------\n");
 	f=0; g=0;
 	
 	
@@ -198,7 +198,7 @@ void somaMatrix(int matriz1[3][3],int matriz2[3][3]){
 		f++;
 		printf("\n");
 	}
-	printf("\t  ----------\n\n\n");
+	printf("\t  -------------------\n\n\n");
 	
 	f=0; g=0;
 	while(f<3){
@@ -226,7 +226,7 @@ void subMatrix(int matriz1[3][3],int matriz2[3][3]){
 		f++;
 		printf("\n");
 	}
-	printf("\t  ----------\n");
+	printf("\t  -------------------\n");
 	f=0; g=0;
 	
 	
@@ -239,7 +239,7 @@ void subMatrix(int matriz1[3][3],int matriz2[3][3]){
 		f++;
 		printf("\n");
 	}
-	printf("\t  ----------\n\n\n");
+	printf("\t  -------------------\n\n\n");
 	
 	f=0; g=0;
 	while(f<3){
@@ -267,7 +267,7 @@ void multMatrix(int matriz1[3][3],int matriz2[3][3]){
 		f++;
 		printf("\n");
 	}
-	printf("\t  ----------\n");
+	printf("\t  -------------------\n");
 	f=0; g=0;
 	
 	
@@ -280,7 +280,7 @@ void multMatrix(int matriz1[3][3],int matriz2[3][3]){
 		f++;
 		printf("\n");
 	}
-	printf("\t  ----------\n\n\n");
+	printf("\t  -------------------\n\n\n");
 
 	int i, j, k;
     for(i = 0; i < 3; i++)

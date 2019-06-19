@@ -16,8 +16,8 @@ IGNORA [" "|\t]
 "*" {return (MULTIPLICACAO);}
 "+" {return (SOMA);}
 "-" {return (SUBTRACAO);}
-"t" {return (TRANSPOSTA);}
-"d" {return (DETERMINANTE);}
+"transp" {return (TRANSPOSTA);}
+"det" {return (DETERMINANTE);}
 "(" {return (PAA); }
 ")" {return (PAF); }
 "{" {return (CA); }
